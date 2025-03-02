@@ -1,7 +1,7 @@
 # Express CRUD
 
 A simple CRUD application built with Express.js.
-![alt text](<Screenshot 2025-03-02 at 3.06.44 PM.png>)
+
 ## Description
 
 This project demonstrates a basic CRUD (Create, Read, Update, Delete) application using Express.js and Node. It includes endpoints for creating, reading, updating, and deleting resources.
