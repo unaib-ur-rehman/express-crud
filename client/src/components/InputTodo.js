@@ -1,20 +1,16 @@
-//a component for adding a new todo item
 "use client";
 import React, { useState } from "react";
+import { addTodo } from "../api/todos";
 
-const InputTodo = () => {
+const InputTodo = ({ onAddTodo }) => {
   const [description, setDescription] = useState("");
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { description };
-      const response = await fetch("http://localhost:5000/todos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      window.location = "/"; //refreshes the page
+      const newTodo = await addTodo(description);
+      onAddTodo(newTodo);
+      setDescription(""); // Clear the input field
     } catch (error) {
       console.error(error.message);
     }

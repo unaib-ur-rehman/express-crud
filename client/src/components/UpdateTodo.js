@@ -1,24 +1,16 @@
+import { getTodos, updateTodo } from "@components/api/todos";
 import React, { useState } from "react";
+
 
 const UpdateTodo = ({ todo, onUpdate, onCancel }) => {
   const [updatedTodo, setUpdatedTodo] = useState(todo.description);
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ description: updatedTodo }),
-      });
-
-      if (response.ok) {
-        onUpdate({ ...todo, description: updatedTodo });
-        onCancel();
-      } else {
-        console.error("Failed to update todo");
-      }
+      await updateTodo(todo.todo_id, updatedTodo);
+      onUpdate({ ...todo, description: updatedTodo });
+      getTodos();
+      onCancel();
     } catch (error) {
       console.error(error.message);
     }
